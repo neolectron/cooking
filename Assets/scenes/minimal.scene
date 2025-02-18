@@ -201,7 +201,7 @@
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "0715cb55-1733-4f5e-8560-c288b8695631",
-              "Center": "0,0,-5",
+              "Center": "0,0,0",
               "Friction": null,
               "IsTrigger": false,
               "OnComponentDestroy": null,
@@ -214,7 +214,7 @@
               "OnObjectTriggerExit": null,
               "OnTriggerEnter": null,
               "OnTriggerExit": null,
-              "Scale": "100,100,10",
+              "Scale": "100,100,1",
               "Static": false,
               "Surface": null,
               "SurfaceVelocity": "0,0,0"
@@ -561,6 +561,60 @@
               "SurfaceVelocity": "0,0,0"
             }
           ]
+        },
+        {
+          "__guid": "b8ffa4bd-f698-4baa-9dda-53e3bed8a4b6",
+          "Flags": 0,
+          "Name": "counter-under",
+          "Position": "417.5025,1729.466,-1073.814",
+          "Scale": "1,14,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "cd07590a-5294-47b8-9988-f3868c47ef0b",
+              "BodyGroups": 18446744073709551615,
+              "CreateAttachments": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/dev/box.vmdl",
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "bf8094da-d4f4-4f2b-978d-fc53cde51b31",
+              "Center": "0,0,0",
+              "Friction": null,
+              "IsTrigger": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "Scale": "50.10004,50.1,50.1",
+              "Static": true,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          ]
         }
       ]
     },
@@ -598,32 +652,6 @@
               "OnPropTakeDamage": null,
               "StartAsleep": false,
               "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CarriableComponent",
-              "__guid": "88ee1180-c2eb-476e-b6e8-fc7732503c1c",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnUse": {
-                "__version": 9,
-                "__guid": "ef255db0-3b33-46c3-be1f-a92bd87addcb",
-                "__changeId": 2,
-                "UserData": {
-                  "Title": "On Use"
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  }
-                ],
-                "Links": []
-              }
             }
           ]
         },
@@ -654,17 +682,6 @@
               "OnPropTakeDamage": null,
               "StartAsleep": false,
               "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CarriableComponent",
-              "__guid": "158e16b7-a714-4542-abe0-f3213fa956ad",
-              "OnComponentDestroy": null,
-              "OnComponentDisabled": null,
-              "OnComponentEnabled": null,
-              "OnComponentFixedUpdate": null,
-              "OnComponentStart": null,
-              "OnComponentUpdate": null,
-              "OnUse": null
             }
           ]
         }
@@ -725,29 +742,42 @@
         {
           "__type": "TopDownPlayerController",
           "__guid": "d9dd42a4-9530-4cfd-855d-daec9e35239d",
-          "AnimationHelper": {
-            "_type": "component",
-            "component_id": "6d028c46-2b4e-4644-b710-dc6521e6047d",
-            "go": "a445084b-d3dd-4e01-882e-f0aef539add5",
-            "component_type": "CitizenAnimationHelper"
-          },
-          "CharacterController": {
-            "_type": "component",
-            "component_id": "5261bbbd-bfb6-4079-affb-b30490bd9323",
-            "go": "a445084b-d3dd-4e01-882e-f0aef539add5",
-            "component_type": "CharacterController"
-          },
+          "AirControl": 0.1,
+          "allowAnimation": true,
+          "allowCrouch": true,
+          "allowJump": true,
+          "allowSprint": true,
+          "animationHelper": null,
+          "characterController": null,
           "CrouchSpeed": 128,
-          "Gravity": -850,
-          "JumpSpeed": 400,
+          "GroundControl": 4,
+          "Head": null,
+          "JumpForce": 400,
+          "MaxForce": 50,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
+          "printDebug": true,
           "RunSpeed": 320,
-          "WalkSpeed": 198
+          "Speed": 160
+        },
+        {
+          "__type": "PlayerUse",
+          "__guid": "6f281972-9445-412a-925e-1c4b556ddf37",
+          "allowUse": true,
+          "debugDraw": true,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "useRange": 10000,
+          "useSound": "wowsound/balloon.sound",
+          "useTags": "pickup"
         }
       ],
       "Children": [
@@ -793,7 +823,7 @@
               "Sequence": {
                 "Name": null
               },
-              "Tint": "0.16667,1,0,1",
+              "Tint": "1,1,1,1",
               "UseAnimGraph": true
             }
           ]
@@ -833,7 +863,8 @@
     "eurorp.gas_stove#9916",
     "facepunch.old_cooker#79883",
     "kenneynl.foodkitturkey#80664",
-    "sugmatextures.stylizedwoodplanks#37833"
+    "sugmatextures.stylizedwoodplanks#37833",
+    "titanovsky.sfx_bln#54120"
   ],
   "__version": 2
 }
