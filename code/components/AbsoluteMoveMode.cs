@@ -4,19 +4,7 @@ using Sandbox.Movement;
 [Description( "Rotates the entity to face the direction of movement." )]
 [Category( "Movement" )]
 [Icon( "transfer_within_a_station" )]
-public class MoveModeAbsolute : MoveMode, PlayerController.IEvents {
-  [Property]
-  public int Priority { get; set; } = 0;
-
-  [Property]
-  public float GroundAngle { get; set; } = 45f;
-
-  [Property]
-  public float StepUpHeight { get; set; } = 18f;
-
-  [Property]
-  public float StepDownHeight { get; set; } = 18f;
-
+public class MoveModeAbsolute : MoveModeWalk, PlayerController.IEvents {
   [Property]
   public override bool AllowGrounding => true;
 
@@ -43,36 +31,51 @@ public class MoveModeAbsolute : MoveMode, PlayerController.IEvents {
 
   public void OnEyeAngles( ref Angles angles ) {
     Log.Info( "OnEyeAngles" );
-    if ( Controller.WishVelocity.IsNearlyZero() ) return; // keep previous rotation when vectors are too small
-    //TODO: Fix Roation so it always faces the direction of movement
-    angles = Rotation.LookAt( Controller.WorldPosition + Controller.WishVelocity ).Angles();
+    PlayerController player = Controller;
+
+    // keep previous rotation when vectors are too small
+    if ( player.WishVelocity.IsNearlyZero() ) return;
+
+    if ( PrintDebug ) {
+      Gizmo.Draw.Color = Color.Blue;
+      Gizmo.Draw.Line( player.WorldPosition, player.WorldPosition + player.WishVelocity );
+    }
+
+    //TODO: Fix Rotation so it always faces the direction of movement
+    // angles = Rotation.LookAt( player.WorldPosition + player.WishVelocity ).Angles();
+
   }
 
   [Description( "Read inputs, return WishVelocity" )]
   public override Vector3 UpdateMove( Rotation eyes, Vector3 input ) {
-    // Log.Info( "UpdateMove" );
-
     PlayerController player = Controller;
     Vector3 wishVelocity = new Vector3( -input.y, input.x, input.z ).WithZ( 0 ).Normal;
 
+    //TODO: Might not be the best since we lose joystick precision for slow movement
+    //make this configurable
     if ( player.IsDucking ) wishVelocity *= player.DuckedSpeed;
     else if ( IsRunning ) wishVelocity *= player.RunSpeed;
     else wishVelocity *= player.WalkSpeed;
 
-    if ( PrintDebug ) {
-      Gizmo.Draw.Color = Color.Blue;
-      Gizmo.Draw.Line( player.WorldPosition, player.WorldPosition + wishVelocity );
-    }
-
-    // Angles wishAngles = Rotation.LookAt( wishVelocity.Normal );
-    // eyes = wishAngles;
+    Angles wishAngles = Rotation.LookAt( player.WorldPosition + player.WishVelocity ).Angles();
+    eyes = wishAngles;
 
     // return base.UpdateMove( eyes, wishVelocity );
     return wishVelocity;
   }
 
+  // Default UpdateMove
+  // [Description( "Read inputs, return WishVelocity" )]
+  // public override Vector3 UpdateMove( Rotation eyes, Vector3 input ) {
+  //   Angles value = eyes.Angles();
+  //   value.pitch = 0f;
+  //   eyes = value;
+  //   return base.UpdateMove( eyes, input );
+  // }
+
   public override void OnModeBegin() {
     Log.Info( "MoveModeAbsolute has started." );
+
     Controller.UseLookControls = false;
     Controller.LookSensitivity = 0f;
   }
