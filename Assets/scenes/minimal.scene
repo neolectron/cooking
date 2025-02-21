@@ -731,7 +731,7 @@
           "FootstepVolume": 1,
           "HideBodyInFirstPerson": false,
           "JumpSpeed": 300,
-          "LookSensitivity": 1,
+          "LookSensitivity": 0,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -757,7 +757,7 @@
           "ToggleCameraModeButton": "view",
           "UseAnimatorControls": true,
           "UseButton": "use",
-          "UseCameraControls": true,
+          "UseCameraControls": false,
           "UseFovFromPreferences": true,
           "UseInputControls": true,
           "UseLookControls": false,
@@ -791,8 +791,11 @@
           "StartAsleep": false
         },
         {
-          "__type": "Sandbox.Movement.MoveModeWalk",
+          "__type": "MoveModeAbsolute",
           "__guid": "281b36d1-b09c-401d-8b5a-809f1183f746",
+          "AllowFalling": true,
+          "AllowGrounding": true,
+          "AllowRunning": true,
           "GroundAngle": 45,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -800,6 +803,7 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
+          "PrintDebug": true,
           "Priority": 0,
           "StepDownHeight": 18,
           "StepUpHeight": 18
@@ -873,7 +877,7 @@
               "Sequence": {
                 "Name": null
               },
-              "Tint": "1,1,1,1",
+              "Tint": "0,0.31667,1,1",
               "UseAnimGraph": true
             }
           ]
