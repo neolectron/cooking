@@ -30,7 +30,7 @@ public class MoveModeAbsolute : MoveModeWalk, PlayerController.IEvents {
   }
 
   public void OnEyeAngles( ref Angles angles ) {
-    Log.Info( "OnEyeAngles" );
+    // Log.Info( "OnEyeAngles" );
     PlayerController player = Controller;
 
     // keep previous rotation when vectors are too small
